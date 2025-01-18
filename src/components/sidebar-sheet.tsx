@@ -27,7 +27,7 @@ const SideBarButton = () => {
                         <LogInIcon />
                     </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="w-[80%]">
                     <DialogHeader>
                         <DialogTitle>Faça login na plataforma</DialogTitle>
                         <DialogDescription>Conece-se usando sua conta do Google</DialogDescription>

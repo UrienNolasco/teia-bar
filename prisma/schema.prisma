@@ -7,14 +7,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
-  id       String      @id @default(uuid())
-  nome     String
-  email    String      @unique
-  senha    String
-  tipo     TipoUsuario
-  criadoEm DateTime    @default(now())
-  consumos Consumo[]
+model User {
+  id            String      @id @default(cuid())
+  name          String?
+  email         String      @unique
+  emailVerified DateTime?
+  image         String?
+  tipo          TipoUsuario
+  accounts      Account[]
+  sessions      Session[]
+  consumos      Consumo[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
 }
 
 model Produto {
@@ -36,7 +79,7 @@ model Consumo {
   valorTotal Decimal  @db.Decimal(10, 2)
   criadoEm   DateTime @default(now())
   produto    Produto  @relation(fields: [produtoId], references: [id])
-  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  user       User     @relation(fields: [usuarioId], references: [id])
 }
 
 enum TipoUsuario {

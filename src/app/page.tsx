@@ -1,5 +1,7 @@
+import CurrentDay from "@/components/data-atual"
 import Header from "@/components/header"
 import ProdutoItem from "@/components/produto-item"
+import UserName from "@/components/usuario-logado"
 import { db } from "@/lib/prisma"
 
 const Home = async () => {
@@ -10,8 +12,8 @@ const Home = async () => {
     <div>
         <Header />
         <div className="p-5">
-          <h2 className="text-base font-bold">Olá, ! O que você deseja beber hoje?</h2>
-          <p className="text-sm">Sexta-feira, 17 de janeiro.</p>
+          <UserName />
+          <CurrentDay />
           <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Bebidas</h2>
           <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
             {produtos.map(produto => <ProdutoItem key={produto.id} produto={produto}/>)}

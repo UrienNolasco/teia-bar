@@ -8,42 +8,57 @@ import { CircleDollarSign} from "lucide-react";
 import { Badge } from "./ui/badge";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { createConsumo } from "@/app/actions/create-consumo";
+
 
 interface ProdutoItemProp{
-    produto: Produto
+
+    produto: {
+
+        id: string;
+
+        nome: string;
+
+        descricao: string | null;
+
+        valor: number;
+
+        quantidadeEstoque: number;
+
+        criadoEm: Date;
+
+        imageUrl: string | null;
+
+    }
+
 }
 
 
+
 const ProdutoItem = ({produto}:ProdutoItemProp) => {
-
     const {data: session} = useSession();
+    const { data } = useSession();
 
-    const handleComprar = async () => {
-        if(!session){
-            alert('Você precisa estar logado para comprar');
-            return;
-        }
-        try {
-            const response = await fetch("/api/compra", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                produtoId: produto.id,
-                quantidade: 1, // ou a quantidade escolhida
-              }),
-            });
-      
-            if (response.ok) {
-              toast.success("Compra realizada com sucesso!");
-            } else {
-              const errorData = await response.json();
-              toast.error(`Erro ao realizar a compra: ${errorData.message}`);
+    const quantidade = 1;
+
+    const handleCreateConsumo = async () => {
+        try{
+            if(!session){
+                toast.warning("Você precisa estar logado para realizar uma compra.");
+                return;
             }
-          } catch (error) {
-            toast.error("Ocorreu um erro inesperado. Tente novamente.");
-          }
+            await createConsumo({
+                produtoId: produto.id,
+                usuarioId: (data?.user as any).id, 
+                criadoEm: new Date(),
+                quantidade: quantidade,
+                valorTotal: Number(produto.valor) * quantidade
+            })
+            toast.success("Compra realizada com sucesso");
+        }catch(error){
+            console.error(error);
+            toast.error("Erro ao realizar compra");
+        }
     };
 
     return ( 
@@ -55,7 +70,7 @@ const ProdutoItem = ({produto}:ProdutoItemProp) => {
                     <Badge  className="absolute left-2 top-2 space-x-1">
                         <CircleDollarSign size={17}  />
                         <p className="text-xs font-semibold">
-                              {produto.valor.toString()}
+                              {Number(produto.valor)}
                         </p>
                     </Badge>
                 </div>
@@ -64,7 +79,7 @@ const ProdutoItem = ({produto}:ProdutoItemProp) => {
                 <div className=" py-3 text-center">
                     <h3 className="font-semibold truncate ">{produto.nome}</h3>
                     <p className="text-xs text-gray-400 truncate"> {produto.descricao} </p>
-                    <Button variant="secondary" className="w-full mt-3" onClick={handleComprar}>
+                    <Button variant="secondary" className="w-full mt-3" onClick={handleCreateConsumo}>
                         Comprar
                     </Button>
                 </div>

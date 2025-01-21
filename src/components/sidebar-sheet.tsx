@@ -1,12 +1,13 @@
 "use client";
 
-import { CircleMinus, CirclePlus, LogInIcon, LucideLogOut, MenuIcon, Settings } from "lucide-react";
+import { CircleMinus, CirclePlus, LogInIcon, LucideLogOut, MenuIcon, PackageOpen, PackageOpenIcon, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const SideBarButton = () => {
   const { data } = useSession();
@@ -70,6 +71,14 @@ const SideBarButton = () => {
           <Button className="justify-start gap-2">
             <Settings /> Alterar Bebidas
           </Button>
+        </div>
+
+        <div className="p-5 flex flex-col gap-4 border-b border-solid">
+          <Link href="/consumeManagement">
+            <Button className="justify-start gap-2">
+              <PackageOpen /> Ver Consumo
+            </Button>
+          </Link>
         </div>
 
         <div className="p-5 flex flex-col gap-4">

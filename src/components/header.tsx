@@ -2,12 +2,16 @@ import Image from "next/image"
 import { Card, CardContent } from "./ui/card"
 
 import SideBarButton from "./sidebar-sheet"
+import Link from "next/link"
 
 const Header = () => {
   return (
     <Card>
       <CardContent className="flex flex-row items-center justify-between p-5">
-        <Image src="/Logo-teia.avif" height={18} width={120} alt="TeiaBar" />
+        <Link href="/"> 
+        
+          <Image src="/Logo-teia.avif" height={18} width={120} alt="TeiaBar" />
+        </Link>
         <SideBarButton />
       </CardContent>
     </Card>

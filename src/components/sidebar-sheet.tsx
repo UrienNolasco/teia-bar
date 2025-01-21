@@ -14,6 +14,7 @@ const SideBarButton = () => {
   const handleLogout = () => signOut();
   const handleLoginWithGoogle = () => signIn("google");
 
+
   return (
     <Sheet>
       <SheetTrigger asChild>

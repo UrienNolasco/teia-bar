@@ -46,14 +46,20 @@ const ConsumoItem = ({consumo}:ConsumoItemProp) => {
         fetchProdutoNome();
     }, [consumo.produtoId]);
     return ( 
-        <Card className="min-w-[200px] rounded-2xl">
+        <Card className=" min-w-[200px] rounded-2xl">
             <CardContent className="p-0 px-2 pt-2">
-                <div className="relative h-[150px] w-full" >
-                    <p className="truncate">
-                        {produtoNome}
+                <div className=" relative h-[150px] w-full" >
+                    <p>
+                        Quem consumiu: 
                     </p>
-                    <p className="truncate">
+                    <p>
                         {userName}
+                    </p>
+                    <p className="mt-8">
+                      O que consumiu  
+                    </p>
+                    <p>
+                        {produtoNome}
                     </p>
                 </div>
             </CardContent>

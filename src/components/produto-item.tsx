@@ -33,8 +33,6 @@ interface ProdutoItemProp{
 
 }
 
-
-
 const ProdutoItem = ({produto}:ProdutoItemProp) => {
     const {data: session} = useSession();
     const { data } = useSession();
@@ -68,9 +66,12 @@ const ProdutoItem = ({produto}:ProdutoItemProp) => {
                 <div className="relative h-[159px] w-full" >
                     <Image className="object-contain rounded-2xl" fill layout="fill" src={produto.imageUrl ?? '/default-image.png'} alt={produto.nome}/>
                     <Badge  className="absolute left-2 top-2 space-x-1">
-                        <CircleDollarSign size={17}  />
+                        {/* <CircleDollarSign size={17}  /> */}
                         <p className="text-xs font-semibold">
-                              {Number(produto.valor)}
+                            {Number(produto.valor).toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                            })}
                         </p>
                     </Badge>
                 </div>

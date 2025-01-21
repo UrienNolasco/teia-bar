@@ -10,6 +10,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import CadastrarBebida from "./cadastrarbebida";
 
 const SideBarButton = () => {
   const { data } = useSession();
@@ -68,43 +69,7 @@ const SideBarButton = () => {
 
 
             {/* Cadastrar Bebida */}
-          <Dialog>
-            <DialogTrigger asChild>
-            <Button className="justify-start gap-2">
-              <CirclePlus /> Adicionar Bebidas
-            </Button>
-            </DialogTrigger>
-            <DialogContent className="w-[90%]">
-              <DialogTitle className="text-2xl">Cadastrar Bebida</DialogTitle>
-                <div className="grid gap-4 py-2">
-                  <div className="grid grid-cols-4 gap-10 items-center">
-                    <Label className="text-base" htmlFor="nome">Bebida</Label>
-                    <Input id="nome" className="col-span-3 text-sm py-1 px-2" defaultValue="Nome da Bebida" />
-                  </div>
-                </div>
-                <div className="grid gap-6 py-2">
-                  <div className="grid grid-cols-4 gap-10 items-center">
-                    <Label className="text-base" htmlFor="desc">Descrição</Label>
-                    <Input id="desc" className="col-span-3 text-sm px-2" defaultValue="Long Neck, 350ml, 250ml" />
-                  </div>
-                </div>
-                <div className="grid gap-4 py-2">
-                  <div className="grid grid-cols-4 gap-2 items-center">
-                    <Label className="text-base" htmlFor="valor">Valor</Label>
-                    <Input id="valor" className="col-span-3 text-sm py-1 px-2" defaultValue="Valor" />
-                  </div>
-                </div>
-                <div className="grid gap-4 py-w ">
-                  <div className="grid grid-cols-4 gap-24 items-center ">
-                    <Label className="text-base"  htmlFor="quantidade">Quantidade</Label>
-                    <Input id="quantidade" className="col-span-3 text-sm py-1 px-2 " defaultValue="Quantidade" />
-                  </div>
-                </div>
-              <DialogFooter className="mt-2">
-                <Button type="submit">Salvar</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <CadastrarBebida />
 
             {/* Remover Bebida */}
           <Dialog>

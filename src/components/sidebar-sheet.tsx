@@ -4,10 +4,12 @@ import { CircleMinus, CirclePlus, LogInIcon, LucideLogOut, MenuIcon, PackageOpen
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Avatar, AvatarImage } from "./ui/avatar";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 const SideBarButton = () => {
   const { data } = useSession();
@@ -63,17 +65,82 @@ const SideBarButton = () => {
 
         {/*BOTOES*/}
         <div className="p-5 flex flex-col gap-4 border-b border-solid">
-          <Button className="justify-start gap-2">
-            <CirclePlus /> Adicionar Bebidas
-          </Button>
-          <Button className="justify-start gap-2">
+
+
+            {/* Cadastrar Bebida */}
+          <Dialog>
+            <DialogTrigger asChild>
+            <Button className="justify-start gap-2">
+              <CirclePlus /> Adicionar Bebidas
+            </Button>
+            </DialogTrigger>
+            <DialogContent className="w-[90%]">
+              <DialogTitle className="text-2xl">Cadastrar Bebida</DialogTitle>
+                <div className="grid gap-4 py-2">
+                  <div className="grid grid-cols-4 gap-10 items-center">
+                    <Label className="text-base" htmlFor="nome">Bebida</Label>
+                    <Input id="nome" className="col-span-3 text-sm py-1 px-2" defaultValue="Nome da Bebida" />
+                  </div>
+                </div>
+                <div className="grid gap-6 py-2">
+                  <div className="grid grid-cols-4 gap-10 items-center">
+                    <Label className="text-base" htmlFor="desc">Descrição</Label>
+                    <Input id="desc" className="col-span-3 text-sm px-2" defaultValue="Long Neck, 350ml, 250ml" />
+                  </div>
+                </div>
+                <div className="grid gap-4 py-2">
+                  <div className="grid grid-cols-4 gap-2 items-center">
+                    <Label className="text-base" htmlFor="valor">Valor</Label>
+                    <Input id="valor" className="col-span-3 text-sm py-1 px-2" defaultValue="Valor" />
+                  </div>
+                </div>
+                <div className="grid gap-4 py-w ">
+                  <div className="grid grid-cols-4 gap-24 items-center ">
+                    <Label className="text-base"  htmlFor="quantidade">Quantidade</Label>
+                    <Input id="quantidade" className="col-span-3 text-sm py-1 px-2 " defaultValue="Quantidade" />
+                  </div>
+                </div>
+              <DialogFooter className="mt-2">
+                <Button type="submit">Salvar</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+            {/* Remover Bebida */}
+          <Dialog>
+            <DialogTrigger asChild>
+            <Button className="justify-start gap-2">
             <CircleMinus /> Remover Bebidas
           </Button>
-          <Button className="justify-start gap-2">
+            </DialogTrigger>
+            <DialogContent className="w-[80%]">
+              <DialogTitle>Remover Bebidas</DialogTitle>
+              
+            </DialogContent>
+          </Dialog>
+          
+
+            {/* Alterar Bebida */}
+            <Dialog>
+            <DialogTrigger asChild>
+            <Button className="justify-start gap-2">
             <Settings /> Alterar Bebidas
           </Button>
+            </DialogTrigger>
+            <DialogContent className="w-[80%]">
+              <DialogTitle>Alterar Bebidas</DialogTitle>
+              <DialogHeader>
+
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
+
+
         </div>
 
+
+          {/*CONSUMO*/}
         <div className="p-5 flex flex-col gap-4 border-b border-solid">
           <Link href="/consumeManagement">
             <Button className="justify-start gap-2">

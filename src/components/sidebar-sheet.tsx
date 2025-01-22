@@ -71,7 +71,7 @@ const SideBarButton = () => {
 
             {/* Cadastrar Bebida */}
           <CadastrarBebida />
-
+          
             {/* Remover Bebida */}
           <RemoverBebidas />
           

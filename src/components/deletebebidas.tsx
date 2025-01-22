@@ -31,16 +31,16 @@ const RemoverBebidas = () => {
     }, []);
     
     return ( 
-        <Dialog>
+        <Dialog >
         <DialogTrigger asChild>
         <Button className="justify-start gap-2">
         <CircleMinus /> Remover Bebidas
       </Button>
         </DialogTrigger>
-        <DialogContent className="w-[80%]">
+        <DialogContent className="w-[80%] max-h-[90%] overflow-y-auto [&::-webkit-scrollbar]:hidden rounded-2xl">
           <DialogTitle>Remover Bebidas</DialogTitle>
 
-          <div className="">
+          <div className="flex flex-col gap-5">
           {loading ? (
             <p>Carregando...</p>
           ) : produtos.length > 0 ? (

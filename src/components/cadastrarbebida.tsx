@@ -65,7 +65,7 @@ const CadastrarBebida = () => {
           <CirclePlus /> Adicionar Bebidas
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[90%]">
+      <DialogContent className="w-[80%] rounded-2xl">
         <DialogTitle className="text-2xl">Cadastrar Bebida</DialogTitle>
         <div className="grid gap-4 py-2">
           <div className="grid grid-cols-4 gap-10 items-center">

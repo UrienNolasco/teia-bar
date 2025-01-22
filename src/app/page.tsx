@@ -25,7 +25,7 @@ const Home = async () => {
           <CurrentDay />
           <ToastContainer />
           <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Bebidas</h2>
-          <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden ">
           {produtosPlain.map((produto) => (
             <ProdutoItem key={produto.id} produto={produto} />
           ))}

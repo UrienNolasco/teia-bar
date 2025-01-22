@@ -78,7 +78,7 @@ const ProdutoItem = ({produto, isRemoving = false}:ProdutoItemProp) => {
             <CardContent className="p-0 px-2 pt-2">
                 {/* IMAGEM */}
                 <div className="relative h-[159px] w-full" >
-                    <Image className="object-contain rounded-2xl" fill layout="fill" src={produto.imageUrl ?? '/default-image.png'} alt={produto.nome}/>
+                    <Image className="object-contain rounded-2xl" fill src={produto.imageUrl ?? '/default-image.png'} alt={produto.nome} overrideSrc={produto.imageUrl ?? undefined}/>
                     <Badge  className="absolute left-2 top-2 space-x-1">
                         {/* <CircleDollarSign size={17}  /> */}
                         <p className="text-xs font-semibold">

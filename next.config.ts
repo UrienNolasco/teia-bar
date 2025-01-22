@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "localhost"
+        hostname: "i.imgur.com"
 
       }
     ]

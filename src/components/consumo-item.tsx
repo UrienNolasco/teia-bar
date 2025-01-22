@@ -1,4 +1,7 @@
 "use client"
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "./ui/card";

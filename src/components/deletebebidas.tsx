@@ -1,4 +1,6 @@
 "use client"
+/* eslint-disable react/react-in-jsx-scope */
+
 
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "./ui/dialog";
 import { CircleMinus } from "lucide-react";

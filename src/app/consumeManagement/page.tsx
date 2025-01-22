@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import ConsumoItem from "@/components/consumo-item";
 import Header from "@/components/header";
 import { db } from "@/lib/prisma";

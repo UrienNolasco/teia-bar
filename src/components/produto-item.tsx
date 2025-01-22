@@ -1,10 +1,11 @@
 "use client";
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Produto } from "@prisma/client";
+
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { CircleDollarSign} from "lucide-react";
 import { Badge } from "./ui/badge";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";

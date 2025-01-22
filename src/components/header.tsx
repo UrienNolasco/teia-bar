@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import Image from "next/image"
 import { Card, CardContent } from "./ui/card"
 

@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import CurrentDay from "@/components/data-atual"
 import Header from "@/components/header"
 import ProdutoItem from "@/components/produto-item"

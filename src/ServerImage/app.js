@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable no-undef */
+
+
+
 const express = require('express');
 const multer = require('multer');
 const path = require('path');

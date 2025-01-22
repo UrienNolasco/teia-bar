@@ -1,6 +1,9 @@
 "use client";
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { CircleMinus, CirclePlus, LogInIcon, LucideLogOut, MenuIcon, PackageOpen, PackageOpenIcon, Settings } from "lucide-react";
+
+import { LogInIcon, LucideLogOut, MenuIcon, PackageOpen,  Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Avatar, AvatarImage } from "./ui/avatar";
@@ -8,8 +11,6 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 import CadastrarBebida from "./cadastrarbebida";
 import RemoverBebidas from "./deletebebidas";
 

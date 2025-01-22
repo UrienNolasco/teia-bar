@@ -1,4 +1,7 @@
 "use client";
+/* eslint-disable react/react-in-jsx-scope */
+
+
 import { useSession } from "next-auth/react";
 
 const UserName = () => {

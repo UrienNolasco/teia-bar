@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable react/react-in-jsx-scope */
+
 
 import { CirclePlus } from "lucide-react";
 import { Button } from "./ui/button";

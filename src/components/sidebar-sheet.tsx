@@ -13,6 +13,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import CadastrarBebida from "./cadastrarbebida";
 import RemoverBebidas from "./deletebebidas";
+import { toast } from "react-toastify";
 
 const SideBarButton = () => {
   const { data } = useSession();

@@ -1,24 +1,28 @@
 "use client";
 /* eslint-disable react/react-in-jsx-scope */
 
-
 import { CirclePlus } from "lucide-react";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { cadastrarBebida } from "@/app/actions/create-bebida";
+import { useSession } from "next-auth/react";
 
 const CadastrarBebida = () => {
+  const { data } = useSession();
+
   const [formData, setFormData] = useState({
     nome: "",
     descricao: "",
     valor: "",
     quantidade: "",
-    imageUrl: "", // Alterado para corresponder ao ID do campo
+    imageUrl: "",
   });
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -35,7 +39,6 @@ const CadastrarBebida = () => {
         return;
       }
 
-      // Verificar se as conversões são válidas
       const valor = parseFloat(formData.valor);
       const quantidade = parseInt(formData.quantidade, 10);
 
@@ -53,56 +56,65 @@ const CadastrarBebida = () => {
       });
 
       toast.success("Bebida cadastrada com sucesso");
+      setIsDialogOpen(false); // Fechar o diálogo após salvar
     } catch (error) {
-      console.error("Erro ao cadastrar bebida:", error); // Logar o erro para debug
+      console.error("Erro ao cadastrar bebida:", error);
       toast.error("Erro ao cadastrar bebida");
     }
   };
 
+  const handleDialogOpen = () => {
+    if (!data?.user) {
+      toast.warning("Você precisa estar logado para cadastrar uma bebida.");
+      return;
+    }
+    setIsDialogOpen(true);
+  };
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="justify-start gap-2">
-          <CirclePlus /> Adicionar Bebidas
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="w-[80%] rounded-2xl">
-        <DialogTitle className="text-2xl">Cadastrar Bebida</DialogTitle>
-        <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-20 items-center">
-            <Label className="text-base" htmlFor="nome">Bebida</Label>
-            <Input id="nome" className="col-span-3 text-sm py-1 px-2" value={formData.nome} onChange={handleInputChange} />
+    <>
+      <Button className="justify-start gap-2" onClick={handleDialogOpen}>
+        <CirclePlus /> Adicionar Bebidas
+      </Button>
+      <Dialog open={isDialogOpen} onOpenChange={(open) => setIsDialogOpen(open)}>
+        <DialogContent className="w-[80%] rounded-2xl">
+          <DialogTitle className="text-2xl">Cadastrar Bebida</DialogTitle>
+          <div className="grid gap-4 py-2">
+            <div className="grid grid-cols-4 gap-20 items-center">
+              <Label className="text-base" htmlFor="nome">Bebida</Label>
+              <Input id="nome" className="col-span-3 text-sm py-1 px-2" value={formData.nome} onChange={handleInputChange} />
+            </div>
           </div>
-        </div>
-        <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-20 items-center">
-            <Label className="text-base" htmlFor="descricao">Descrição</Label>
-            <Input id="descricao" className="col-span-3 text-sm py-1 px-2" value={formData.descricao} onChange={handleInputChange} />
+          <div className="grid gap-4 py-2">
+            <div className="grid grid-cols-4 gap-20 items-center">
+              <Label className="text-base" htmlFor="descricao">Descrição</Label>
+              <Input id="descricao" className="col-span-3 text-sm py-1 px-2" value={formData.descricao} onChange={handleInputChange} />
+            </div>
           </div>
-        </div>
-        <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-20 items-center">
-            <Label className="text-base" htmlFor="valor">Valor</Label>
-            <Input id="valor" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.valor} onChange={handleInputChange} />
+          <div className="grid gap-4 py-2">
+            <div className="grid grid-cols-4 gap-20 items-center">
+              <Label className="text-base" htmlFor="valor">Valor</Label>
+              <Input id="valor" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.valor} onChange={handleInputChange} />
+            </div>
           </div>
-        </div>
-        <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-20 items-center">
-            <Label className="text-base" htmlFor="quantidade">Quantidade</Label>
-            <Input id="quantidade" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.quantidade} onChange={handleInputChange} />
+          <div className="grid gap-4 py-2">
+            <div className="grid grid-cols-4 gap-20 items-center">
+              <Label className="text-base" htmlFor="quantidade">Quantidade</Label>
+              <Input id="quantidade" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.quantidade} onChange={handleInputChange} />
+            </div>
           </div>
-        </div>
-        <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-20 items-center">
-            <Label className="text-base" htmlFor="imageUrl">ImageUrl</Label>
-            <Input id="imageUrl" className="col-span-3 text-sm py-1 px-2" value={formData.imageUrl} onChange={handleInputChange} />
+          <div className="grid gap-4 py-2">
+            <div className="grid grid-cols-4 gap-20 items-center">
+              <Label className="text-base" htmlFor="imageUrl">ImageUrl</Label>
+              <Input id="imageUrl" className="col-span-3 text-sm py-1 px-2" value={formData.imageUrl} onChange={handleInputChange} />
+            </div>
           </div>
-        </div>
-        <DialogFooter className="mt-2">
-          <Button onClick={handleOnClickSave}>Salvar</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          <DialogFooter className="mt-2">
+            <Button onClick={handleOnClickSave}>Salvar</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google"; 
 
-const handler = NextAuth ({
+const handler = NextAuth({
     adapter: PrismaAdapter(db) as Adapter,
     providers: [
         GoogleProvider({
@@ -13,14 +13,15 @@ const handler = NextAuth ({
         })
     ],
     callbacks: {
-        async session({session, user}){
+        async session({ session, user }) {
             session.user = {
                 ...session.user,
                 id: user.id,
             } as any;
             return session;
-        }
-    }
-})
+        },
+    },
+    secret: process.env.NEXT_AUTH_SECRET,
+});
 
-export { handler as GET , handler as POST } 
+export default handler;

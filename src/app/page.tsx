@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-
+export const revalidate = 0;
 
 import CurrentDay from "@/components/data-atual"
 import Header from "@/components/header"

@@ -7,7 +7,6 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { db } from "@/lib/prisma";
 import { cadastrarBebida } from "@/app/actions/create-bebida";
 
 const CadastrarBebida = () => {
@@ -16,7 +15,7 @@ const CadastrarBebida = () => {
     descricao: "",
     valor: "",
     quantidade: "",
-    imagemUrl: "",
+    imageUrl: "", // Alterado para corresponder ao ID do campo
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,10 +45,10 @@ const CadastrarBebida = () => {
       await cadastrarBebida({
         nome: formData.nome,
         descricao: formData.descricao,
-        valor: parseFloat(formData.valor),
-        quantidadeEstoque: parseInt(formData.quantidade, 10),
-        imageUrl: formData.imagemUrl,
-      })
+        valor: valor,
+        quantidadeEstoque: quantidade,
+        imageUrl: formData.imageUrl,
+      });
 
       toast.success("Bebida cadastrada com sucesso");
     } catch (error) {
@@ -68,33 +67,33 @@ const CadastrarBebida = () => {
       <DialogContent className="w-[80%] rounded-2xl">
         <DialogTitle className="text-2xl">Cadastrar Bebida</DialogTitle>
         <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-10 items-center">
+          <div className="grid grid-cols-4 gap-20 items-center">
             <Label className="text-base" htmlFor="nome">Bebida</Label>
             <Input id="nome" className="col-span-3 text-sm py-1 px-2" value={formData.nome} onChange={handleInputChange} />
           </div>
         </div>
         <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-10 items-center">
+          <div className="grid grid-cols-4 gap-20 items-center">
             <Label className="text-base" htmlFor="descricao">Descrição</Label>
             <Input id="descricao" className="col-span-3 text-sm py-1 px-2" value={formData.descricao} onChange={handleInputChange} />
           </div>
         </div>
         <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-10 items-center">
+          <div className="grid grid-cols-4 gap-20 items-center">
             <Label className="text-base" htmlFor="valor">Valor</Label>
             <Input id="valor" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.valor} onChange={handleInputChange} />
           </div>
         </div>
         <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-10 items-center">
+          <div className="grid grid-cols-4 gap-20 items-center">
             <Label className="text-base" htmlFor="quantidade">Quantidade</Label>
             <Input id="quantidade" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.quantidade} onChange={handleInputChange} />
           </div>
         </div>
         <div className="grid gap-4 py-2">
-          <div className="grid grid-cols-4 gap-10 items-center">
-            <Label className="text-base" htmlFor="quantidade">ImageUrl</Label>
-            <Input id="ImageUrl" className="col-span-3 text-sm py-1 px-2" value={formData.quantidade} onChange={handleInputChange} />
+          <div className="grid grid-cols-4 gap-20 items-center">
+            <Label className="text-base" htmlFor="imageUrl">ImageUrl</Label>
+            <Input id="imageUrl" className="col-span-3 text-sm py-1 px-2" value={formData.imageUrl} onChange={handleInputChange} />
           </div>
         </div>
         <DialogFooter className="mt-2">

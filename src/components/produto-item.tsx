@@ -9,6 +9,7 @@ import { Badge } from "./ui/badge";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { createConsumo } from "@/app/actions/create-consumo";
+import { deletarBebida } from "@/app/actions/delete-bebida";
 
 
 interface ProdutoItemProp{
@@ -29,33 +30,45 @@ interface ProdutoItemProp{
 
         imageUrl: string | null;
 
-    }
-
+    } ;
+    isRemoving?: boolean;
 }
 
-const ProdutoItem = ({produto}:ProdutoItemProp) => {
+const ProdutoItem = ({produto, isRemoving = false}:ProdutoItemProp) => {
     const {data: session} = useSession();
     const { data } = useSession();
 
     const quantidade = 1;
 
-    const handleCreateConsumo = async () => {
-        try{
-            if(!session){
-                toast.warning("Você precisa estar logado para realizar uma compra.");
-                return;
+    const handleClickOnbutton = async () => {
+        if(isRemoving){
+            try{
+                await deletarBebida({
+                    id: produto.id
+                })
+                toast.success("Produto removido com sucesso");
+            } catch (error){
+                console.error("Erro ao remover produto:", error);
+                toast.error("Erro ao remover produto");
             }
-            await createConsumo({
-                produtoId: produto.id,
-                usuarioId: (data?.user as any).id, 
-                criadoEm: new Date(),
-                quantidade: quantidade,
-                valorTotal: Number(produto.valor) * quantidade
-            })
-            toast.success("Compra realizada com sucesso");
-        }catch(error){
-            console.error(error);
-            toast.error("Erro ao realizar compra");
+        } else{
+            try{
+                if(!session){
+                    toast.warning("Você precisa estar logado para realizar uma compra.");
+                    return;
+                }
+                await createConsumo({
+                    produtoId: produto.id,
+                    usuarioId: (data?.user as any).id, 
+                    criadoEm: new Date(),
+                    quantidade: quantidade,
+                    valorTotal: Number(produto.valor) * quantidade
+                })
+                toast.success("Compra realizada com sucesso");
+            }catch(error){
+                console.error(error);
+                toast.error("Erro ao realizar compra");
+            }
         }
     };
 
@@ -80,8 +93,8 @@ const ProdutoItem = ({produto}:ProdutoItemProp) => {
                 <div className=" py-3 text-center">
                     <h3 className="font-semibold truncate ">{produto.nome}</h3>
                     <p className="text-xs text-gray-400 truncate"> {produto.descricao} </p>
-                    <Button variant="secondary" className="w-full mt-3" onClick={handleCreateConsumo}>
-                        Comprar
+                    <Button variant="secondary" className="w-full mt-3" onClick={handleClickOnbutton}>
+                        {isRemoving ? "Remover" : "Comprar"}
                     </Button>
                 </div>
             </CardContent>

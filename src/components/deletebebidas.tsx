@@ -45,7 +45,7 @@ const RemoverBebidas = () => {
             <p>Carregando...</p>
           ) : produtos.length > 0 ? (
             produtos.map((produto) => (
-              <ProdutoItem key={produto.id} produto={produto} />
+              <ProdutoItem key={produto.id} produto={produto} isRemoving={true} />
             ))
           ) : (
             <p>Nenhum produto encontrado.</p>

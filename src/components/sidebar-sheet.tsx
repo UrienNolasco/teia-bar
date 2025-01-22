@@ -11,6 +11,7 @@ import Link from "next/link";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import CadastrarBebida from "./cadastrarbebida";
+import RemoverBebidas from "./deletebebidas";
 
 const SideBarButton = () => {
   const { data } = useSession();
@@ -72,17 +73,7 @@ const SideBarButton = () => {
           <CadastrarBebida />
 
             {/* Remover Bebida */}
-          <Dialog>
-            <DialogTrigger asChild>
-            <Button className="justify-start gap-2">
-            <CircleMinus /> Remover Bebidas
-          </Button>
-            </DialogTrigger>
-            <DialogContent className="w-[80%]">
-              <DialogTitle>Remover Bebidas</DialogTitle>
-              
-            </DialogContent>
-          </Dialog>
+          <RemoverBebidas />
           
 
             {/* Alterar Bebida */}

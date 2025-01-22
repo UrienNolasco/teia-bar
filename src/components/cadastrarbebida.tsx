@@ -16,6 +16,7 @@ const CadastrarBebida = () => {
     descricao: "",
     valor: "",
     quantidade: "",
+    imagemUrl: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +48,7 @@ const CadastrarBebida = () => {
         descricao: formData.descricao,
         valor: parseFloat(formData.valor),
         quantidadeEstoque: parseInt(formData.quantidade, 10),
+        imageUrl: formData.imagemUrl,
       })
 
       toast.success("Bebida cadastrada com sucesso");
@@ -87,6 +89,12 @@ const CadastrarBebida = () => {
           <div className="grid grid-cols-4 gap-10 items-center">
             <Label className="text-base" htmlFor="quantidade">Quantidade</Label>
             <Input id="quantidade" type="number" className="col-span-3 text-sm py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" value={formData.quantidade} onChange={handleInputChange} />
+          </div>
+        </div>
+        <div className="grid gap-4 py-2">
+          <div className="grid grid-cols-4 gap-10 items-center">
+            <Label className="text-base" htmlFor="quantidade">ImageUrl</Label>
+            <Input id="ImageUrl" className="col-span-3 text-sm py-1 px-2" value={formData.quantidade} onChange={handleInputChange} />
           </div>
         </div>
         <DialogFooter className="mt-2">

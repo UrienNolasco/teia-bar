@@ -1,7 +1,6 @@
 "use server";
 
 import { db } from "@/lib/prisma";
-import { toast } from "react-toastify";
 
 
 interface CadastrarBebidaParams {
@@ -9,6 +8,7 @@ interface CadastrarBebidaParams {
   descricao: string;
   valor: number;
   quantidadeEstoque: number;
+  imageUrl?: string;
 }
 
 export const cadastrarBebida = async (params: CadastrarBebidaParams) => {
@@ -23,9 +23,8 @@ export const cadastrarBebida = async (params: CadastrarBebidaParams) => {
       data: params,
     });
 
-    toast.success("Bebida cadastrada com sucesso");
   } catch (error) {
     console.error("Erro ao cadastrar bebida:", error);
-    toast.error("Erro ao cadastrar bebida");
+
   }
 };

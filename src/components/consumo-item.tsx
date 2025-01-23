@@ -51,18 +51,24 @@ const ConsumoItem = ({consumo}:ConsumoItemProp) => {
     return ( 
         <Card className=" min-w-[200px] rounded-2xl">
             <CardContent className="p-0 px-2 pt-2">
-                <div className=" relative h-[150px] w-full" >
-                    <p>
+                <div className=" relative h-[170px] w-full" >
+                    <p className="font-semibold">
                         Quem consumiu: 
                     </p>
                     <p>
                         {userName}
                     </p>
-                    <p className="mt-8">
-                      O que consumiu  
+                    <p className="mt-2 font-semibold ">
+                        O que consumiu:  
                     </p>
                     <p>
                         {produtoNome}
+                    </p>
+                    <p className="mt-2 font-semibold">
+                        Quando Consumiu:
+                    </p>
+                    <p>
+                        {consumo.criadoEm.toLocaleDateString()}
                     </p>
                 </div>
             </CardContent>

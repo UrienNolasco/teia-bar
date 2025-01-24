@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { getProdutos } from "@/app/actions/get-produto";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { isUserAdmin } from "@/app/actions/get-useradmin";
 
 interface Produto {
   id: string;
@@ -35,12 +36,24 @@ const RemoverBebidas = () => {
     fetchProdutos();
   }, []);
 
-  const handleDialogOpen = () => {
-    if (!session?.user) {
-      toast.warning("Você precisa estar logado para remover uma bebida.");
-      return;
+  const handleDialogOpen = async () => {
+    try {
+      if (!session || !session.user || !session.user.email) {
+        toast.warning("Você precisa estar logado para acessar esta funcionalidade.");
+        return;
+      }
+  
+      const isAdmin = await isUserAdmin(session.user.email);
+      if (!isAdmin) {
+        toast.error("Apenas administradores podem cadastrar bebidas.");
+        return;
+      }
+  
+      setIsDialogOpen(true);
+    } catch (error) {
+      console.error("Erro ao verificar permissão do usuário:", error);
+      toast.error("Erro ao verificar permissão.");
     }
-    setIsDialogOpen(true);
   };
 
   return (

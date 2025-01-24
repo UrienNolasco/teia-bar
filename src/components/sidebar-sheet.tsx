@@ -14,12 +14,33 @@ import Link from "next/link";
 import CadastrarBebida from "./cadastrarbebida";
 import RemoverBebidas from "./deletebebidas";
 import { toast } from "react-toastify";
+import { isUserAdmin } from "@/app/actions/get-useradmin";
 
 const SideBarButton = () => {
   const { data } = useSession();
   const handleLogout = () => signOut();
   const handleLoginWithGoogle = () => signIn("google");
 
+
+  const handleConsumeAccess = async () => {
+    try {
+      if (!data || !data.user || !data.user.email) {
+        toast.warning("Você precisa estar logado para acessar esta funcionalidade.");
+        return;
+      }
+
+      const isAdmin = await isUserAdmin(data.user.email);
+      if (!isAdmin) {
+        toast.error("Apenas administradores podem acessar a parte de consumo.");
+        return;
+      }
+
+      window.location.href = "/consumeManagement";
+    } catch (error) {
+      console.error("Erro ao verificar permissão do usuário:", error);
+      toast.error("Erro ao verificar permissão.");
+    }
+  };
 
   return (
     <Sheet>
@@ -70,7 +91,7 @@ const SideBarButton = () => {
         {/*BOTOES*/}
         <div className="p-5 flex flex-col gap-4 border-b border-solid">
 
-
+          
             {/* Cadastrar Bebida */}
           <CadastrarBebida />
           
@@ -98,11 +119,9 @@ const SideBarButton = () => {
 
           {/*CONSUMO*/}
         <div className="p-5 flex flex-col gap-4 border-b border-solid">
-          <Link href="/consumeManagement">
-            <Button className="justify-start gap-2">
+            <Button className="justify-start gap-2" onClick={handleConsumeAccess}>
               <PackageOpen /> Ver Consumo
             </Button>
-          </Link>
         </div>
 
         <div className="p-5 flex flex-col gap-4">

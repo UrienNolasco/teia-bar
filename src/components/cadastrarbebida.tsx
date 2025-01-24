@@ -10,8 +10,10 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { cadastrarBebida } from "@/app/actions/create-bebida";
 import { useSession } from "next-auth/react";
+import { isUserAdmin } from "@/app/actions/get-useradmin";
 
 const CadastrarBebida = () => {
+  const {data: session} = useSession();
   const { data } = useSession();
 
   const [formData, setFormData] = useState({
@@ -56,20 +58,34 @@ const CadastrarBebida = () => {
       });
 
       toast.success("Bebida cadastrada com sucesso");
-      setIsDialogOpen(false); // Fechar o diálogo após salvar
+      setIsDialogOpen(false);
     } catch (error) {
       console.error("Erro ao cadastrar bebida:", error);
       toast.error("Erro ao cadastrar bebida");
     }
   };
 
-  const handleDialogOpen = () => {
-    if (!data?.user) {
-      toast.warning("Você precisa estar logado para cadastrar uma bebida.");
-      return;
+  const handleDialogOpen = async () => {
+    try {
+      if (!session || !session.user || !session.user.email) {
+        toast.warning("Você precisa estar logado para acessar esta funcionalidade.");
+        return;
+      }
+  
+      const isAdmin = await isUserAdmin(session.user.email);
+      if (!isAdmin) {
+        toast.error("Apenas administradores podem cadastrar bebidas.");
+        return;
+      }
+
+      setIsDialogOpen(true);
+    } catch (error) {
+      console.error("Erro ao verificar permissão do usuário:", error);
+      toast.error("Erro ao verificar permissão.");
     }
-    setIsDialogOpen(true);
   };
+  
+  
 
   return (
     <>

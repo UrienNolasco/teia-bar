@@ -14,7 +14,6 @@ import { isUserAdmin } from "@/app/actions/get-useradmin";
 
 const CadastrarBebida = () => {
   const {data: session} = useSession();
-  const { data } = useSession();
 
   const [formData, setFormData] = useState({
     nome: "",

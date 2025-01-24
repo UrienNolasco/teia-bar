@@ -93,7 +93,7 @@ const ProdutoItem = ({produto, isRemoving = false}:ProdutoItemProp) => {
                 {/* TEXTO */}
                 <div className=" py-3 text-center">
                     <h3 className="font-semibold truncate ">{produto.nome}</h3>
-                    <p className="text-xs text-gray-400 truncate"> {produto.descricao} </p>
+                    <p className="ext-xs text-gray-400 truncate max-w-xs mx-auto"> {produto.descricao} </p>
                     <Button variant="secondary" className="w-full mt-3" onClick={handleClickOnbutton}>
                         {isRemoving ? "Remover" : "Comprar"}
                     </Button>

@@ -5,6 +5,7 @@ export const revalidate = 0; // Para garantir renderização dinâmica
 
 import ConsumoItem from "@/components/consumo-item";
 import Header from "@/components/header";
+import UserConsumptionOverview from "@/components/UserConsumptionOverview";
 import { db } from "@/lib/prisma";
 
 const ConsumeManagement = async () => {
@@ -26,7 +27,7 @@ const ConsumeManagement = async () => {
             </div>
             <div className="ml-4 mt-6 text-sm font-bold uppercase ">
                 <h1>Valores a Pagar</h1>
-                
+                    <UserConsumptionOverview />
             </div>
         </div>
      );

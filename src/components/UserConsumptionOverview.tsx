@@ -17,7 +17,6 @@ const UserConsumptionOverview = async () => {
     },
   });
 
-  console.log(usersWithConsumption)
 
   const processedUsers = usersWithConsumption.map((user) => {
     const consumoCount = user.consumos.length;
@@ -36,7 +35,7 @@ const UserConsumptionOverview = async () => {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mb-10">
       {processedUsers.map((user) => (
         <Card key={user.id} className="shadow-md rounded-lg">
           <CardContent className="flex items-center p-4">

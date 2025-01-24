@@ -87,9 +87,7 @@ const SideBarButton = () => {
             </DialogTrigger>
             <DialogContent className="w-[80%]">
               <DialogTitle>Alterar Bebidas</DialogTitle>
-              <DialogHeader>
-
-              </DialogHeader>
+                Em implementação
             </DialogContent>
           </Dialog>
 

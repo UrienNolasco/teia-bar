@@ -25,8 +25,8 @@ const ConsumeManagement = async () => {
                     <ConsumoItem key={consumo.id} consumo={consumo}/>
                 ))}
             </div>
-            <div className="ml-4 mt-6 text-sm font-bold uppercase ">
-                <h1>Valores a Pagar</h1>
+            <div className=" mt-6 text-sm font-bold uppercase pb-2">
+                <h1 className="ml-4">Valores a Pagar</h1>
                     <UserConsumptionOverview />
             </div>
         </div>

@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { db } from "@/lib/prisma";
 
 const UserConsumoSummary = async({userId}: {userId: string}) => {

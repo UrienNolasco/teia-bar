@@ -1,3 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+export const revalidate = 0;
+
 import ConsumoPessoalOverview from "@/components/consumopessoaloverview";
 import Header from "@/components/header";
 import ConsumoPessoalItem from "@/components/personal-consumo-item";

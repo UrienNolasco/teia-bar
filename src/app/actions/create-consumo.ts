@@ -21,6 +21,10 @@ export const createConsumo = async (params: CreateConsumoParams) => {
         data: params,
       });
 
+      await transaction.consumoHistorico.create({
+        data: params,
+      })
+
       const produto = await transaction.produto.findUnique({
         where: { id: produtoId },
       });

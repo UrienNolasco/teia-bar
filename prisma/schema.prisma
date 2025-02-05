@@ -19,6 +19,8 @@ model User {
   consumos      Consumo[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+
+  ConsumoHistorico ConsumoHistorico[]
 }
 
 model Account {
@@ -69,6 +71,7 @@ model Produto {
   criadoEm          DateTime  @default(now())
   imageUrl          String?
   consumos          Consumo[]
+  consumoHistoricos ConsumoHistorico[]
 }
 
 model Consumo {
@@ -77,6 +80,17 @@ model Consumo {
   produtoId  String
   quantidade Int
   valorTotal Decimal  @db.Decimal(10, 2)
+  criadoEm   DateTime @default(now())
+  produto    Produto  @relation(fields: [produtoId], references: [id])
+  user       User     @relation(fields: [usuarioId], references: [id])
+}
+
+model ConsumoHistorico {
+  id               String   @id @default(uuid())
+  usuarioId        String
+  produtoId        String
+  quantidade       Int
+  valorTotal       Decimal  @db.Decimal(10, 2)
   criadoEm   DateTime @default(now())
   produto    Produto  @relation(fields: [produtoId], references: [id])
   user       User     @relation(fields: [usuarioId], references: [id])

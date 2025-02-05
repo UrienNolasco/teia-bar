@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+export const revalidate = 0;
 
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";

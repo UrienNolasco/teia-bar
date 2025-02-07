@@ -23,12 +23,12 @@ const Home = async () => {
   return (
     <div>
         <Header />
-        <div className="p-5">
+        <div className="p-5 pb-16">
           <UserName />
           <CurrentDay />
           <ToastContainer />
           <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Bebidas</h2>
-          <div className="flex flex-col w-56 gap-4 overflow-auto [&::-webkit-scrollbar]:hidden ">
+          <div className="flex flex-col items-center w-56 gap-4 overflow-auto [&::-webkit-scrollbar]:hidden ">
           {produtosPlain.map((produto) => (
             <ProdutoItem key={produto.id} produto={produto} />
           ))}

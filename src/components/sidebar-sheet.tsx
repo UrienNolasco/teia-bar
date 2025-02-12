@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 
-import { LogInIcon, LucideLogOut, MenuIcon, Package, PackageOpen,  Settings } from "lucide-react";
+import { ChartArea, ChartAreaIcon, ChartScatter, LogInIcon, LucideLogOut, MenuIcon, Package, PackageOpen,  Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Avatar, AvatarImage } from "./ui/avatar";
@@ -51,6 +51,20 @@ const SideBarButton = () => {
       }
 
       window.location.href = "/consumeManagementUnique";
+    } catch (error) {
+      console.error("Erro ao verificar permissão do usuário:", error);
+      toast.error("Erro ao verificar permissão.");
+    }
+  };
+
+  const handleChartsAcessUnique = async () => {
+    try {
+      if (!data || !data.user || !data.user.email) {
+        toast.warning("Você precisa estar logado para acessar esta funcionalidade.");
+        return;
+      }
+
+      window.location.href = "/charts";
     } catch (error) {
       console.error("Erro ao verificar permissão do usuário:", error);
       toast.error("Erro ao verificar permissão.");
@@ -120,6 +134,8 @@ const SideBarButton = () => {
         </div>
 
 
+
+
           {/*CONSUMO*/}
         <div className="p-5 flex flex-col gap-4 border-b border-solid">
             <Button className="justify-start gap-2" onClick={handleConsumeAccess}>
@@ -138,6 +154,13 @@ const SideBarButton = () => {
               <Package /> Consumo Individual
             </Button>
         </div>
+
+        <div className="p-5 flex flex-col gap-4 pt-1">
+            <Button className="justify-start gap-2" onClick={handleChartsAcessUnique}>
+              <ChartAreaIcon /> Gráficos
+            </Button>
+        </div>
+
       </SheetContent>
     </Sheet>
   );

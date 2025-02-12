@@ -15,6 +15,7 @@ import CadastrarBebida from "./cadastrarbebida";
 import RemoverBebidas from "./deletebebidas";
 import { toast } from "react-toastify";
 import { isUserAdmin } from "@/app/actions/get-useradmin";
+import EditarBebidas from "./editar-bebidas";
 
 const SideBarButton = () => {
   const { data } = useSession();
@@ -114,19 +115,7 @@ const SideBarButton = () => {
           
 
             {/* Alterar Bebida */}
-            <Dialog>
-            <DialogTrigger asChild>
-            <Button className="justify-start gap-2">
-            <Settings /> Alterar Bebidas
-          </Button>
-            </DialogTrigger>
-            <DialogContent className="w-[80%]">
-              <DialogTitle>Alterar Bebidas</DialogTitle>
-                Em implementação
-            </DialogContent>
-          </Dialog>
-
-
+            <EditarBebidas />
 
         </div>
 

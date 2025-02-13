@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import {
@@ -11,20 +12,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getConsumptionTotalsByMonth } from "@/app/actions/get-mothconsumption";
+import { getSpentTotalsByMonth } from "@/app/actions/get-monthspent";
 
 type MonthlyTotal = {
   month: string;
   total: number;
 };
 
-export default function ChartAllConsume() {
+export default function ChartAllSpentMoney() {
   const [consumptionData, setConsumptionData] = useState<MonthlyTotal[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getConsumptionTotalsByMonth();
+        const data = await getSpentTotalsByMonth();
         setConsumptionData(data);
       } catch (error) {
         console.error("Erro ao buscar dados de consumo:", error);
@@ -45,9 +46,9 @@ export default function ChartAllConsume() {
     
     <Card className="mx-auto max-w-4xl w-full">
       <CardHeader>
-        <CardTitle>Consumo Total de Bebidas</CardTitle>
+        <CardTitle>Valor total gasto por mês</CardTitle>
         <CardDescription>
-          Consumo agregado de todas as bebidas por mês
+          Valor agregado de todas as bebidas no mês
         </CardDescription>
       </CardHeader>
       <CardContent className="px-0 sm:px-6">
@@ -58,25 +59,25 @@ export default function ChartAllConsume() {
                 top: 5,
                 right: 30,
                 left: 20,
-                bottom: 40, // Aumentamos a margem inferior para os rótulos
+                bottom: 40, 
               }}>
                 <CartesianGrid 
                   vertical={false} 
-                  stroke="#696969" // Cor original
+                  stroke="#696969" 
                   />
                 <XAxis
                   dataKey="month"
                   tickLine={false}
                   axisLine={false}
-                  angle={-40} // Inclina os rótulos
+                  angle={-40} 
                   textAnchor="middle"
-                  interval={0} // Garante que todos os meses sejam exibidos
+                  interval={0} 
                   tick={{ 
                     fontSize: 12,
-                    fill: 'hsl(215.4 16.3% 46.9%)', // Cor do texto
+                    fill: 'hsl(215.4 16.3% 46.9%)', 
                     dy: 10,
                   }}
-                  tickMargin={25} // Espaço adicional
+                  tickMargin={25} 
                 />
                 <Tooltip 
                   contentStyle={{ 
@@ -88,7 +89,7 @@ export default function ChartAllConsume() {
                   dataKey="total"
                   fill={chartConfig.total.color}
                   radius={4}
-                  name="Consumo Total"
+                  name="R$"
                 />
               </BarChart>
             </ResponsiveContainer>

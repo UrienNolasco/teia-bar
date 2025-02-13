@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const revalidate = 0;
 
+import { BeverageConsumptionChart } from "@/components/BeverageConsumptionChart";
 import ChartAllConsume from "@/components/chartAllConsume";
 import ChartAllSpentMoney from "@/components/chartAllSpentMoney";
 import Header from "@/components/header";
@@ -15,7 +16,10 @@ const Charts = () => {
                     <div className="my-4">
                         <ChartAllConsume />
                     </div>
+                    <div className="my-4">
                         <ChartAllSpentMoney />
+                    </div>
+                        <BeverageConsumptionChart />
                 </div>
 
         </div>

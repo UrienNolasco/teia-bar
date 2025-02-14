@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import {
@@ -26,7 +25,12 @@ export default function ChartAllSpentMoney() {
     async function fetchData() {
       try {
         const data = await getSpentTotalsByMonth();
-        setConsumptionData(data);
+        // Formata o valor total para moeda
+        const formattedData = data.map((item: MonthlyTotal) => ({
+          ...item,
+          total: parseFloat(item.total.toFixed(2)), // Certifica-se de que o valor é um número com duas casas decimais
+        }));
+        setConsumptionData(formattedData);
       } catch (error) {
         console.error("Erro ao buscar dados de consumo:", error);
       }
@@ -43,7 +47,6 @@ export default function ChartAllSpentMoney() {
 
   return (
     <> 
-    
     <Card className="mx-auto max-w-4xl w-full">
       <CardHeader>
         <CardTitle>Valor total gasto por mês</CardTitle>
@@ -64,7 +67,7 @@ export default function ChartAllSpentMoney() {
                 <CartesianGrid 
                   vertical={false} 
                   stroke="#696969" 
-                  />
+                />
                 <XAxis
                   dataKey="month"
                   tickLine={false}
@@ -84,12 +87,14 @@ export default function ChartAllSpentMoney() {
                     borderRadius: '8px',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                   }}
+                  formatter={(value: number) => 
+                    new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
+                  }
                 />
                 <Bar
                   dataKey="total"
                   fill={chartConfig.total.color}
                   radius={4}
-                  name="R$"
                 />
               </BarChart>
             </ResponsiveContainer>

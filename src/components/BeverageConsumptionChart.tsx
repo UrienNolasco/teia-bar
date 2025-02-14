@@ -33,8 +33,6 @@ const monthNames = [
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
 ];
 
-// Removed the invalid top-level useState here
-
 const colors = [
   'hsl(205, 70%, 50%)',
   'hsl(120, 70%, 50%)',
@@ -49,7 +47,6 @@ export function BeverageConsumptionChart() {
     const [selectedMonth, setSelectedMonth] = React.useState(0)
     const [activeIndex, setActiveIndex] = React.useState(0)
   
-    // Keep the useState for chartData here inside the component
     const [chartData, setChartData] = React.useState<{
       month: string
       data: Array<{beverageId: string, beverageName: string, total: number, fill: string}>

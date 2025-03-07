@@ -6,7 +6,7 @@ import { NextResponse, NextRequest } from "next/server"
 
 export async function GET(req: NextRequest) {
   try {
-    const consumo = await db.consumo.findMany({
+    const consumo = await db.consumoHistorico.findMany({
       include: {
         user: {
           select: {

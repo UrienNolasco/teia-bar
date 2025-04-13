@@ -19,6 +19,8 @@ const Home = async () => {
     valor: produto.valor.toNumber(),
   }));
 
+  
+
 
   return (
     <div>

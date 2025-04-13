@@ -1,0 +1,22 @@
+{
+    "name": "Bar da teia",
+    "short_name": "TeiaBar",
+    "description": "Bar online da teia connect",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "icons": [
+      {
+        "src": "/public/teia-logo-192.jpg",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/public/teia-logo-512.jpg",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

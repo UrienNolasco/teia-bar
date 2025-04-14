@@ -1,44 +1,49 @@
-"use client"
+"use client";
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
 
 export function InstallPWAButton() {
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handler = (e: Event) => {
-      e.preventDefault()
-      setDeferredPrompt(e)
-      setIsVisible(true)
-    }
+      const event = e as BeforeInstallPromptEvent;
+      e.preventDefault();
+      setDeferredPrompt(event);
+      setIsVisible(true);
+    };
 
-    window.addEventListener("beforeinstallprompt", handler)
+    window.addEventListener("beforeinstallprompt", handler);
 
-    return () => window.removeEventListener("beforeinstallprompt", handler)
-  }, [])
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return
+    if (!deferredPrompt) return;
 
-    const promptEvent = deferredPrompt as any
-    promptEvent.prompt()
+    await deferredPrompt.prompt();
+    const result = await deferredPrompt.userChoice;
 
-    const result = await promptEvent.userChoice
     if (result.outcome === "accepted") {
-      console.log("Usuário aceitou instalar")
+      console.log("Usuário aceitou instalar");
     } else {
-      console.log("Usuário recusou instalar")
+      console.log("Usuário recusou instalar");
     }
 
-    setIsVisible(false)
-    setDeferredPrompt(null)
-  }
+    setIsVisible(false);
+    setDeferredPrompt(null);
+  };
 
-  if (!isVisible) return null
+  if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -46,5 +51,5 @@ export function InstallPWAButton() {
         Instalar app
       </Button>
     </div>
-  )
+  );
 }

@@ -1,21 +1,22 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Footer from "@/components/footer";
-import AuthProvider from "./providers/auth";
-import Script from "next/script";
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import "./globals.css"
+import Footer from "@/components/footer"
+import AuthProvider from "./providers/auth"
+import Script from "next/script"
+import { InstallPWAButton } from "@/components/installpwabutton"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+})
 
 export const metadata: Metadata = {
   title: "Bar da Teia",
@@ -32,12 +33,12 @@ export const metadata: Metadata = {
     initialScale: 1,
     maximumScale: 1,
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" className="dark">
@@ -50,7 +51,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-            {children}
+          {children}
+          <InstallPWAButton />
           <Footer />
         </AuthProvider>
         <Script
@@ -74,5 +76,5 @@ export default function RootLayout({
         />
       </body>
     </html>
-  );
+  )
 }

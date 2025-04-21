@@ -188,7 +188,7 @@ const ExportExcel = () => {
 
       // Adicionar dados a partir da linha 4
       data.forEach((item: ConsumoData) => {
-        const row = worksheet.addRow({
+        worksheet.addRow({
           periodo: item.periodo,
           nome: item.nome,
           produto: item.produto,

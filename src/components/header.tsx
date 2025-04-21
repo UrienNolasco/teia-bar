@@ -1,5 +1,4 @@
 "use client"
-
 /* eslint-disable react/react-in-jsx-scope */
 
 import Image from "next/image"
@@ -22,7 +21,7 @@ const Header = () => {
           <Image src="/Logo-teia.avif" height={18} width={120} alt="TeiaBar" />
         </Link>
         {isConsumeManagementPage && (
-          <div className="flex gap-2">
+          <div className="flex gap-6">
             <ExportExcel />
             <DeletarConsumo />
           </div>

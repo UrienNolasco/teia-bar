@@ -139,10 +139,10 @@ const ExportExcel = () => {
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
-          <DialogTitle>Exportar Dados</DialogTitle>
+          <DialogTitle>Exportar Consumos</DialogTitle>
           <div className="py-4">
             <p className="mb-4">
-              Selecione o intervalo de tempo para exportação dos dados.
+              Selecione o intervalo de tempo para exportação dos consumos.
             </p>
 
             <div className="grid gap-4">

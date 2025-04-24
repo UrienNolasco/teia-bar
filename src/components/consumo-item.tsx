@@ -1,12 +1,6 @@
-"use client"
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
-
-import { useEffect, useState } from "react";
 import { Card, CardContent } from "./ui/card";
-import { getProdutoNome } from "@/app/actions/get-produtoname";
-import { getUserName } from "@/app/actions/get-username";
 
 interface ConsumoItemProp {
     consumo: {
@@ -14,55 +8,32 @@ interface ConsumoItemProp {
         valorTotal: number;
         quantidade: number;
         criadoEm: Date;
-        usuarioId: string;
-        produtoId: string;
+        // Nomes recebidos diretamente como props
+        userName: string;
+        produtoName: string;
     }
 }
 
+// Pode ser um Server Component simples agora (sem async se não precisar)
 const ConsumoItem = ({consumo}:ConsumoItemProp) => {
-    const [produtoNome, setProdutoNome] = useState<string | null>(null);
-
-    const [userName, setUsername] = useState<string | null>(null);
-    
-
-    useEffect(() => {
-        const fetchUserName = async () => {
-            try{
-                const name = await getUserName({usuarioId: consumo.usuarioId});
-                setUsername(name);
-            }catch(error){
-                setUsername("Erro ao buscar nome");
-            }
-        };
-        fetchUserName();
-    }, [consumo.usuarioId]);
-
-    useEffect(() => {
-        const fetchProdutoNome = async () => {
-            try{
-                const nome = await getProdutoNome({produtoId: consumo.produtoId});
-                setProdutoNome(nome);
-            }catch(error){
-                setProdutoNome("Erro ao buscar produto");
-            }
-        };
-        fetchProdutoNome();
-    }, [consumo.produtoId]);
-    return ( 
+    // Não precisa mais buscar dados aqui!
+    return (
         <Card className=" min-w-[200px] rounded-2xl">
             <CardContent className="p-0 px-2 pt-2">
                 <div className=" relative h-[170px] w-full" >
                     <p className="font-semibold">
-                        Quem consumiu: 
+                        Quem consumiu:
                     </p>
                     <p>
-                        {userName}
+                        {/* Usar o nome recebido via prop */}
+                        {consumo.userName}
                     </p>
                     <p className="mt-2 font-semibold ">
-                        O que consumiu:  
+                        O que consumiu:
                     </p>
                     <p>
-                        {produtoNome}
+                         {/* Usar o nome recebido via prop */}
+                        {consumo.produtoName}
                     </p>
                     <p className="mt-2 font-semibold">
                         Quando Consumiu:
@@ -75,6 +46,5 @@ const ConsumoItem = ({consumo}:ConsumoItemProp) => {
         </Card>
      );
 }
-
 
 export default ConsumoItem;

@@ -133,8 +133,8 @@ const ExportExcel = () => {
 
   return (
     <div>
-      <Button onClick={handleDialogOpen} className="bg-green-500">
-        <FileDown    />
+      <Button onClick={handleDialogOpen} className="bg-green-500 hover:bg-green-600">
+        <FileDown />
       </Button>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -209,7 +209,10 @@ const ExportExcel = () => {
                       onSelect={setEndDate}
                       initialFocus
                       locale={ptBR}
-                      disabled={(date) => !startDate || date < startDate}
+                      disabled={(date) => {
+                        if (!startDate) return false
+                        return date < startDate
+                      }}
                     />
                   </PopoverContent>
                 </Popover>

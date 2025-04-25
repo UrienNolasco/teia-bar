@@ -1,5 +1,6 @@
 "use client"
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { CalendarIcon, FileDown } from "lucide-react"
 import { Button } from "./ui/button"
@@ -133,7 +134,10 @@ const ExportExcel = () => {
 
   return (
     <div>
-      <Button onClick={handleDialogOpen} className="bg-green-500 hover:bg-green-600">
+      <Button
+        onClick={handleDialogOpen}
+        className="bg-green-500 hover:bg-green-600"
+      >
         <FileDown />
       </Button>
 

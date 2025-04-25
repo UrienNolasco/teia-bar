@@ -224,10 +224,7 @@ const ExportExcel = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Cancelar
-            </Button>
-            <Button onClick={handleExportClick} disabled={isExportDisabled}>
+            <Button onClick={handleExportClick} disabled={isExportDisabled} className="bg-green-500 hover:bg-green-600">
               {isLoading ? "Exportando..." : "Exportar"}
             </Button>
           </DialogFooter>

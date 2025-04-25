@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import AuthProvider from "./providers/auth"
 import Script from "next/script"
 import { InstallPWAButton } from "@/components/installpwabutton"
+import { CacheCleaner } from "@/components/CacheCleaner"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <CacheCleaner />
         <AuthProvider>
           {children}
           <InstallPWAButton />

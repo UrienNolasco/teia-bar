@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import Footer from "@/components/footer"
@@ -23,17 +23,20 @@ export const metadata: Metadata = {
   title: "Bar da Teia",
   description: "Gerenciamento de cosumo",
   manifest: "/manifest.json",
-  themeColor: "#000000",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Bar da Teia",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+  // Removi viewport daqui
+}
+
+// Adicionei viewport como uma exportação separada
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#000000", // Adicione a cor do tema aqui (ajuste para sua cor desejada)
 }
 
 export default function RootLayout({
